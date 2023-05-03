@@ -1,0 +1,7 @@
+data/de.davidbattefeld.envoye.desktop.in
+data/de.davidbattefeld.envoye.appdata.xml.in
+data/de.davidbattefeld.envoye.gschema.xml
+src/window.ui
+src/main.py
+src/window.py
+

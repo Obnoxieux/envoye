@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=envoye
+Exec=envoye
+Icon=de.davidbattefeld.envoye
+Terminal=false
+Type=Application
+Categories=GTK;
+StartupNotify=true

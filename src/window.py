@@ -22,7 +22,7 @@ from gi.repository import Gtk
 class EnvoyeWindow(Gtk.ApplicationWindow):
     __gtype_name__ = 'EnvoyeWindow'
 
-    main_text_view = Gtk.Template.Child()
+    main_box = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

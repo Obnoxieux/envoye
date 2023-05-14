@@ -1,8 +1,8 @@
 using Gtk 4.0;
 
 template EnvoyeWindow : ApplicationWindow {
-  default-width: 600;
-  default-height: 300;
+  default-width: 900;
+  default-height: 500;
   title: "Envoyé - Gmail";
 
   [titlebar]
@@ -19,8 +19,74 @@ template EnvoyeWindow : ApplicationWindow {
     spacing: 0;
 
     StackSidebar sidebar {
-        Label sidebar_label {
-          label: "Some stuff";
+        name: "Sidebar";
+        width-request: 150;
+
+        ListBox {
+          ListBoxRow {
+            margin-start: 3;
+            Box {
+              Image {
+                icon-name: "go-home";
+              }
+              Label {
+                margin-start: 5;
+               label: "Inbox";
+              }
+            }
+          }
+          ListBoxRow {
+          margin-start: 3;
+            Box {
+              Image {
+                icon-name: "go-home";
+              }
+              Label {
+                margin-start: 5;
+                label: "Starred";
+              }
+            }
+          }
+          ListBoxRow {
+            Box {
+              Image {
+                icon-name: "go-home";
+              }
+              Label {
+               label: "Sent Messages";
+              }
+            }
+          }
+          ListBoxRow {
+            Box {
+              Image {
+                icon-name: "go-home";
+              }
+              Label {
+               label: "Spam";
+              }
+            }
+          }
+          ListBoxRow {
+            Box {
+              Image {
+                icon-name: "go-home";
+              }
+              Label {
+               label: "All Mail";
+              }
+            }
+          }
+          ListBoxRow {
+            Box {
+              Image {
+                icon-name: "go-home";
+              }
+              Label {
+               label: "Trash";
+              }
+            }
+          }
         }
     }
 
@@ -28,8 +94,10 @@ template EnvoyeWindow : ApplicationWindow {
       transition-type: slide_left_right;
 
       [title]
-      Label page1_label {
-        label: "Page 1";
+      ListView {
+        Label page1_label {
+          label: "Page 1";
+        }
       }
 
       [title]

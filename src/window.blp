@@ -1,12 +1,16 @@
 using Gtk 4.0;
+using Adw 1;
 
 template EnvoyeWindow : ApplicationWindow {
-  default-width: 900;
-  default-height: 500;
+  default-width: 1600;
+  default-height: 900;
   title: "Envoyé - Gmail";
 
   [titlebar]
   HeaderBar header_bar {
+
+    //[title]
+
     [end]
     MenuButton {
       icon-name: "open-menu-symbolic";
@@ -20,9 +24,11 @@ template EnvoyeWindow : ApplicationWindow {
 
     StackSidebar sidebar {
         name: "Sidebar";
-        width-request: 150;
+        width-request: 250;
 
         ListBox {
+          styles ["navigation-sidebar"]
+
           ListBoxRow {
             margin-start: 3;
             Box {
@@ -94,20 +100,60 @@ template EnvoyeWindow : ApplicationWindow {
       transition-type: slide_left_right;
 
       [title]
-      ListView {
-        Label page1_label {
-          label: "Page 1";
+      Adw.Leaflet {
+        // Leaflet left side content (email list view)
+        ListBox {
+          styles ["rich-list"]
+          show-separators: true;
+
+          ListBoxRow {
+            Box {
+              orientation: vertical;
+              spacing: 0;
+              halign: start;
+              width-request: 200;
+
+              Box {
+                spacing: 220;
+                Label mail_author {
+                  label: "Karl Testmichel";
+                }
+                Label mail_timestamp {
+                  label: "14.05.2023";
+                }
+              }
+              Box {
+                spacing: 220;
+                Label mail_subject {
+                  label: "Python mit GTK rocks!";
+                }
+                Image mail_star_icon {
+                  icon-name: "starred";
+                }
+              }
+              Label mail_text {
+                label: "Hier beginnt der Mailtext, der ziemlich lange sein kann...";
+              }
+            }
+          }
+          Label inbox_label_2 {
+            label: "Inbox right side";
+          }
+        }
+        // Leaflet right side content (email detail view)
+        Label {
+            label: "Leaflet right?";
         }
       }
 
       [title]
       Label page2_label {
-        label: "Page 2";
+        label: "Starred";
       }
 
       [title]
       Label page3_label {
-        label: "Page 3";
+        label: "Sent";
       }
     }
   }

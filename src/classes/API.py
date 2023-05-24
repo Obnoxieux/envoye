@@ -12,7 +12,7 @@ from googleapiclient.errors import HttpError
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
 class API:
-    def loadAndPrintLabels():
+    def loadAndPrintLabels(self):
         """Shows basic usage of the Gmail API.
         Lists the user's Gmail labels.
         """

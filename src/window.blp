@@ -136,8 +136,12 @@ template EnvoyeWindow : ApplicationWindow {
               }
             }
           }
-          Label inbox_label_2 {
-            label: "Inbox right side";
+          ListBoxRow {
+
+            Button api_test_button {
+              label: "API-Testabfrage";
+              action-name: "win.api_test";
+            }
           }
         }
         // Leaflet right side content (email detail view)

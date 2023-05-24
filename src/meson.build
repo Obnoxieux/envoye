@@ -39,6 +39,7 @@ envoye_sources = [
   '__init__.py',
   'main.py',
   'window.py',
+  'classes/API.py'
 ]
 
 install_data(envoye_sources, install_dir: moduledir)

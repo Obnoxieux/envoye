@@ -8,14 +8,11 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-# If modifying these scopes, delete the file token.json.
-SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
-
 class API:
-    def loadAndPrintLabels(self):
-        """Shows basic usage of the Gmail API.
-        Lists the user's Gmail labels.
-        """
+    def __init__(self) -> None:
+        pass
+
+    def getCredentials(self, SCOPES) -> Credentials:
         creds = None
         # The file token.json stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first
@@ -33,6 +30,17 @@ class API:
             # Save the credentials for the next run
             with open('token.json', 'w') as token:
                 token.write(creds.to_json())
+        return creds
+
+    def loadAndPrintLabels(self):
+        """Shows basic usage of the Gmail API.
+        Lists the user's Gmail labels.
+        """
+
+        # If modifying these scopes, delete the file token.json.
+        SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
+
+        creds = self.getCredentials(SCOPES=SCOPES)
 
         try:
             # Call the Gmail API

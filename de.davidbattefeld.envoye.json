@@ -1,6 +1,6 @@
 {
     "app-id" : "de.davidbattefeld.envoye",
-    "runtime" : "org.gnome.Platform",
+    "runtime" : "org.gnome.Sdk",
     "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
     "command" : "envoye",
@@ -23,6 +23,7 @@
         "*.a"
     ],
     "modules" : [
+        "python3-requirements.json",
         {
             "name" : "envoye",
             "builddir" : true,
@@ -34,5 +35,8 @@
                 }
             ]
         }
-    ]
+    ],
+    "build-options" : {
+        "env" : {        }
+    }
 }

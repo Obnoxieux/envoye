@@ -8,3 +8,4 @@ prefix=/app
 app-id=
 postbuild=
 prebuild=
+default=true

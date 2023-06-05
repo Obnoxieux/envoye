@@ -39,7 +39,9 @@ envoye_sources = [
   '__init__.py',
   'main.py',
   'window.py',
-  'classes/API.py'
+  'classes/API.py',
+  'classes/label.py',
+  'classes/message.py'
 ]
 
 install_data(envoye_sources, install_dir: moduledir)

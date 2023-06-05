@@ -9,12 +9,31 @@ template EnvoyeWindow : ApplicationWindow {
   [titlebar]
   HeaderBar header_bar {
 
-    //[title]
-
     [end]
     MenuButton {
       icon-name: "open-menu-symbolic";
       menu-model: primary_menu;
+    }
+    [end]
+    Box {
+      orientation: horizontal;
+      spacing: 10;
+
+      Button api_test_button {
+        label: "API-Testabfrage";
+        action-name: "win.api_test";
+      }
+
+      Button load_email_button {
+        label: "Load E-Mails";
+        action-name: "win.load_email";
+      }
+
+      Button compose_email_button {
+        //icon-name: "mail-message-new-symbolic";
+        label: "Compose Email";
+        action-name: "win.compose_email";
+      }
     }
   }
 
@@ -26,70 +45,18 @@ template EnvoyeWindow : ApplicationWindow {
         name: "Sidebar";
         width-request: 250;
 
-        ListBox {
+        ListBox sidebar_list_box {
           styles ["navigation-sidebar"]
 
           ListBoxRow {
             margin-start: 3;
             Box {
               Image {
-                icon-name: "go-home";
+                icon-name: "folder-symbolic";
               }
               Label {
                 margin-start: 5;
-               label: "Inbox";
-              }
-            }
-          }
-          ListBoxRow {
-          margin-start: 3;
-            Box {
-              Image {
-                icon-name: "go-home";
-              }
-              Label {
-                margin-start: 5;
-                label: "Starred";
-              }
-            }
-          }
-          ListBoxRow {
-            Box {
-              Image {
-                icon-name: "go-home";
-              }
-              Label {
-               label: "Sent Messages";
-              }
-            }
-          }
-          ListBoxRow {
-            Box {
-              Image {
-                icon-name: "go-home";
-              }
-              Label {
-               label: "Spam";
-              }
-            }
-          }
-          ListBoxRow {
-            Box {
-              Image {
-                icon-name: "go-home";
-              }
-              Label {
-               label: "All Mail";
-              }
-            }
-          }
-          ListBoxRow {
-            Box {
-              Image {
-                icon-name: "go-home";
-              }
-              Label {
-               label: "Trash";
+               label: "Inbox DEMO LINE";
               }
             }
           }
@@ -107,7 +74,7 @@ template EnvoyeWindow : ApplicationWindow {
           show-separators: true;
 
           ListBoxRow {
-            Box {
+            Box mail_body_box {
               orientation: vertical;
               spacing: 0;
               halign: start;
@@ -134,13 +101,6 @@ template EnvoyeWindow : ApplicationWindow {
               Label mail_text {
                 label: "Hier beginnt der Mailtext, der ziemlich lange sein kann...";
               }
-            }
-          }
-          ListBoxRow {
-
-            Button api_test_button {
-              label: "API-Testabfrage";
-              action-name: "win.api_test";
             }
           }
         }

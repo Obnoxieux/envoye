@@ -12,7 +12,7 @@ class API:
     def __init__(self) -> None:
         pass
 
-    def getCredentials(self, SCOPES) -> Credentials:
+    def get_credentials(self, SCOPES) -> Credentials:
         creds = None
         # The file token.json stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first
@@ -32,7 +32,7 @@ class API:
                 token.write(creds.to_json())
         return creds
 
-    def loadAndPrintLabels(self):
+    def load_and_print_labels(self):
         """Shows basic usage of the Gmail API.
         Lists the user's Gmail labels.
         """
@@ -40,7 +40,7 @@ class API:
         # If modifying these scopes, delete the file token.json.
         SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
-        creds = self.getCredentials(SCOPES=SCOPES)
+        creds = self.get_credentials(SCOPES=SCOPES)
 
         try:
             # Call the Gmail API
@@ -57,4 +57,23 @@ class API:
 
         except HttpError as error:
             # TODO(developer) - Handle errors from gmail API.
+            print(f'An error occurred: {error}')
+
+    def load_labels(self) -> any:
+        SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
+
+        creds = self.get_credentials(SCOPES=SCOPES)
+
+        try:
+            service = build('gmail', 'v1', credentials=creds)
+            results = service.users().labels().list(userId='me').execute()
+            labels = results.get('labels', [])
+
+            if not labels:
+                print('No labels found.')
+                return
+            else:
+                return labels
+
+        except HttpError as error:
             print(f'An error occurred: {error}')

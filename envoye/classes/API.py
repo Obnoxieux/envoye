@@ -7,6 +7,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from envoye.classes.message import *
 
 class API:
     def __init__(self) -> None:
@@ -51,16 +52,14 @@ class API:
                 return
             print('Labels:')
             for label in labels:
-                print(label['name'])
+                print(f"{label['name']} - ID {label['id']} of type {label['type']}")
 
         except HttpError as error:
             # TODO(developer) - Handle errors from gmail API.
             print(f'An error occurred: {error}')
 
     def load_labels(self) -> any:
-        SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
-
-        creds = self.get_credentials(scopes=SCOPES)
+        creds = self.get_credentials(scopes=self.scopes)
 
         try:
             service = build('gmail', 'v1', credentials=creds)
@@ -72,6 +71,52 @@ class API:
                 return
             else:
                 return labels
+
+        except HttpError as error:
+            print(f'An error occurred: {error}')
+
+    def load_messages_for_label(self, labelIds) -> list[Message]:
+        creds = self.get_credentials(scopes=self.scopes)
+    
+        try:
+            service = build('gmail', 'v1', credentials=creds)
+            results = service.users().messages().list(userId='me', labelIds=labelIds).execute()
+            message_responses = results.get('messages', [])
+            messages = []
+
+            if not message_responses:
+                print('No messages found.')
+                return
+            else:
+                for response in message_responses:
+                    messages.append(self.get_single_message(id=response['id'], service=service))
+
+                return messages
+
+        except HttpError as error:
+            print(f'An error occurred: {error}')
+
+    
+    def get_single_message(self, id, service) -> Message:
+        """
+        Retrieves data for single message. Needed because messages().list() only yields id and threadId.
+        """
+        try:
+            result = service.users().messages().get(userId='me', id=id, format='full').execute()
+            #print(result)
+            payload = result.get('payload')
+            #print(payload)
+            message_headers  = payload['headers']
+            headers = []
+            for header in message_headers:
+                headers.append(header)
+
+            print(message_headers[1])
+            payload = Payload(headers=headers)
+            snippet = result.get('snippet')
+            thread_id = result.get('thread_id')
+            # TODO: do label ids
+            return Message(id, [], payload, snippet, thread_id)
 
         except HttpError as error:
             print(f'An error occurred: {error}')

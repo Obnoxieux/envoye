@@ -19,14 +19,14 @@ template EnvoyeWindow : ApplicationWindow {
       orientation: horizontal;
       spacing: 10;
 
-      Button api_test_button {
-        label: "API-Testabfrage";
-        action-name: "win.api_test";
+      Button load_mails_test_button {
+        label: "Print E-Mails IDs for Inbox";
+        action-name: "win.api_mails_inbox";
       }
 
-      Button load_email_button {
-        label: "Load E-Mails";
-        action-name: "win.load_email";
+      Button api_test_button {
+        label: "API test call";
+        action-name: "win.api_test";
       }
 
       Button compose_email_button {
@@ -69,7 +69,7 @@ template EnvoyeWindow : ApplicationWindow {
       [title]
       Adw.Leaflet {
         // Leaflet left side content (email list view)
-        ListBox {
+        ListBox mail_teaser_list_box {
           styles ["rich-list"]
           show-separators: true;
 

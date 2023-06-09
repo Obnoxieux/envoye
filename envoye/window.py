@@ -1,8 +1,8 @@
 from gi.repository import Gtk, Adw, Gio
 
 import sys
-from .API import API
-from .label import Label
+from envoye.classes.API import API
+from envoye.classes.label import Label
 
 @Gtk.Template(resource_path='/de/davidbattefeld/envoye/window.ui')
 class EnvoyeWindow(Gtk.ApplicationWindow):

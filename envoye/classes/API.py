@@ -10,22 +10,23 @@ from googleapiclient.errors import HttpError
 
 class API:
     def __init__(self) -> None:
-        pass
+        # If modifying these scopes, delete the file token.json.
+        self.scopes = ['https://www.googleapis.com/auth/gmail.modify']
 
-    def get_credentials(self, SCOPES) -> Credentials:
+    def get_credentials(self, scopes) -> Credentials:
         creds = None
         # The file token.json stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first
         # time.
         if os.path.exists('token.json'):
-            creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+            creds = Credentials.from_authorized_user_file('token.json', scopes)
         # If there are no (valid) credentials available, let the user log in.
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    'credentials.json', SCOPES)
+                    'credentials.json', scopes)
                 creds = flow.run_local_server(port=0)
             # Save the credentials for the next run
             with open('token.json', 'w') as token:
@@ -37,10 +38,7 @@ class API:
         Lists the user's Gmail labels.
         """
 
-        # If modifying these scopes, delete the file token.json.
-        SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
-
-        creds = self.get_credentials(SCOPES=SCOPES)
+        creds = self.get_credentials(scopes=self.scopes)
 
         try:
             # Call the Gmail API
@@ -62,7 +60,7 @@ class API:
     def load_labels(self) -> any:
         SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
-        creds = self.get_credentials(SCOPES=SCOPES)
+        creds = self.get_credentials(scopes=SCOPES)
 
         try:
             service = build('gmail', 'v1', credentials=creds)

@@ -13,6 +13,7 @@ class EnvoyeWindow(Gtk.ApplicationWindow):
     sidebar_list_box = Gtk.Template.Child()
     mail_body_box = Gtk.Template.Child()
     mail_teaser_list_box = Gtk.Template.Child()
+    toast_overlay = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -48,6 +49,7 @@ class EnvoyeWindow(Gtk.ApplicationWindow):
 
     def test_action(self, action, _):
         self.api.load_and_print_labels()
+        self.toast_overlay.add_toast(Adw.Toast(title="Labels loaded and printed to console"))
 
     def test_inbox_action(self, action, _):
         self.api.load_messages_for_label("INBOX")
@@ -68,14 +70,17 @@ class EnvoyeWindow(Gtk.ApplicationWindow):
             self.sidebar_list_box.append(box_row)
 
     def load_emails_for_label(self, action, _):
+        label_id = 'INBOX'
         #self.mail_teaser_list_box.remove_all() #Apparently unstable and GTK 4.12
-        messages = self.api.load_messages_for_label(labelIds='INBOX') #TODO: pass value
+        messages = self.api.load_messages_for_label(labelIds=label_id) #TODO: pass value
 
         for message in messages:
             snippet = Gtk.Label.new(message.snippet)
             box_row = Gtk.ListBoxRow()
             box_row.set_child(snippet)
             self.mail_teaser_list_box.append(box_row)
+
+        self.toast_overlay.add_toast(Adw.Toast(title=f"Refreshed emails for label {label_id}"))
 
 class AboutDialog(Gtk.AboutDialog):
 

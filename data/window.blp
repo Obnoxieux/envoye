@@ -56,7 +56,7 @@ template EnvoyeWindow : ApplicationWindow {
               }
               Label {
                 margin-start: 5;
-               label: "Inbox DEMO LINE";
+              label: "Inbox DEMO LINE";
               }
             }
           }
@@ -68,38 +68,40 @@ template EnvoyeWindow : ApplicationWindow {
 
       [title]
       Adw.Leaflet {
-        // Leaflet left side content (email list view)
-        ListBox mail_teaser_list_box {
-          styles ["rich-list"]
-          show-separators: true;
+        Adw.ToastOverlay toast_overlay {
+          // Leaflet left side content (email list view)
+          ListBox mail_teaser_list_box {
+            styles ["rich-list"]
+            show-separators: true;
 
-          ListBoxRow {
-            Box mail_body_box {
-              orientation: vertical;
-              spacing: 0;
-              halign: start;
-              width-request: 200;
+            ListBoxRow {
+              Box mail_body_box {
+                orientation: vertical;
+                spacing: 0;
+                halign: start;
+                width-request: 200;
 
-              Box {
-                spacing: 220;
-                Label mail_author {
-                  label: "Karl Testmichel";
+                Box {
+                  spacing: 220;
+                  Label mail_author {
+                    label: "Karl Testmichel";
+                  }
+                  Label mail_timestamp {
+                    label: "14.05.2023";
+                  }
                 }
-                Label mail_timestamp {
-                  label: "14.05.2023";
+                Box {
+                  spacing: 220;
+                  Label mail_subject {
+                    label: "Python mit GTK rocks!";
+                  }
+                  Image mail_star_icon {
+                    icon-name: "starred";
+                  }
                 }
-              }
-              Box {
-                spacing: 220;
-                Label mail_subject {
-                  label: "Python mit GTK rocks!";
+                Label mail_text {
+                  label: "Hier beginnt der Mailtext, der ziemlich lange sein kann...";
                 }
-                Image mail_star_icon {
-                  icon-name: "starred";
-                }
-              }
-              Label mail_text {
-                label: "Hier beginnt der Mailtext, der ziemlich lange sein kann...";
               }
             }
           }

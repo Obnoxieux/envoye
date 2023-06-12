@@ -19,6 +19,15 @@ class EnvoyeWindow(Gtk.ApplicationWindow):
         self.api = API()
         self.labels = []
 
+        self.settings = Gio.Settings(schema_id="de.davidbattefeld.envoye")
+
+        self.settings.bind("window-width", self, "default-width",
+                       Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind("window-height", self, "default-height",
+                       Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind("window-maximized", self, "maximized",
+                       Gio.SettingsBindFlags.DEFAULT)
+
         api_test_action = Gio.SimpleAction(name="api_test")
         api_test_action.connect("activate", self.test_action)
         self.add_action(api_test_action)

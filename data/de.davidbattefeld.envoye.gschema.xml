@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="envoye">
 	<schema id="de.davidbattefeld.envoye" path="/de/davidbattefeld/envoye/">
+		<key name="window-width" type="i">
+		<default>1600</default>
+		</key>
+		<key name="window-height" type="i">
+		<default>900</default>
+		</key>
+		<key name="window-maximized" type="b">
+		<default>false</default>
+		</key>
 	</schema>
 </schemalist>

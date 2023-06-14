@@ -19,7 +19,7 @@ Gmail client for Linux (GTK4). Uses Gmail API instead of IMAP to better interfac
 - [Blueprint compiler for GTK](https://jwestman.pages.gitlab.gnome.org/blueprint-compiler/index.html)
 - Client secrets for Google Cloud project for Google OAuth (contact repository owner)
 
-## Development Setup (Under construction...)
+## Development Setup
 
 - Clone Repository locally
 - Put *credentials.json* file in home folder of current user (/~) - (WIP - should be loaded from project)

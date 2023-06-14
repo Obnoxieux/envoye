@@ -1,4 +1,4 @@
-from gi.repository import Gtk, Adw, Gio
+from gi.repository import Gtk, Adw, Gio, GLib
 
 from envoye.classes.API import *
 from envoye.classes.label import Label
@@ -37,7 +37,10 @@ class EnvoyeWindow(Gtk.ApplicationWindow):
         api_mails_inbox.connect("activate", self.test_inbox_action)
         self.add_action(api_mails_inbox)
 
-        load_emails_for_label = Gio.SimpleAction(name="load_emails_for_label")
+        load_emails_for_label = Gio.SimpleAction(
+                name="load_emails_for_label", 
+                #parameter_type=GLib.VariantType.new('s')
+            )
         load_emails_for_label.connect("activate", self.load_emails_for_label)
         self.add_action(load_emails_for_label)
 
@@ -67,6 +70,7 @@ class EnvoyeWindow(Gtk.ApplicationWindow):
             box_row = Gtk.ListBoxRow()
             box_row.set_child(text)
             box_row.set_action_name('win.load_emails_for_label')
+            #box_row.set_action_target(label.id)
             self.sidebar_list_box.append(box_row)
 
     def load_emails_for_label(self, action, _):
